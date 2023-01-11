@@ -1,4 +1,6 @@
 using FinancesAPI.Infra;
+using FinancesAPI.Infra.Repositories;
+using FinancesAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +13,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SqlServerDbContext>(
-    opt => opt.UseSqlServer("Data Source=localhost;Initial Catalog=rafael;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True")
+    opt => opt.UseSqlServer("Data Source=localhost;Initial Catalog=finances;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True")
 );
+
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
