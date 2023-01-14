@@ -23,6 +23,7 @@ public class CategoryService : ICategoryService
     public async Task Delete(int id)
     {
         var entity = await _categoryRepository.GetAsync(id);
+        if(entity==null) return;
         await _categoryRepository.DeleteAsync(entity);
     }
 
@@ -32,16 +33,19 @@ public class CategoryService : ICategoryService
         return categories.Adapt<IEnumerable<CategoryReadContract>>();
     }
 
-    public async Task<CategoryReadContract> GetAsync(int id)
+    public async Task<CategoryReadContract?> GetAsync(int id)
     {
         var category = await _categoryRepository.GetAsync(id);
-        return category.Adapt<CategoryReadContract>();
+        if(category==null) return null;
+        var contract = category.Adapt<CategoryReadContract>();
+        return contract;
     }
 
     public async Task Update(CategoryUpdateContract contract)
     {
         var entity = await _categoryRepository.GetAsync(contract.Id);
+        if(entity==null) return;
         entity.Adapt(contract);
-        await _categoryRepository.DeleteAsync(entity);
+        await _categoryRepository.UpdateAsync(entity);
     }
 }
