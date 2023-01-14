@@ -45,7 +45,7 @@ public class CategoryService : ICategoryService
     {
         var entity = await _categoryRepository.GetAsync(contract.Id);
         if(entity==null) return;
-        entity.Adapt(contract);
+        contract.Adapt(entity);
         await _categoryRepository.UpdateAsync(entity);
     }
 }
