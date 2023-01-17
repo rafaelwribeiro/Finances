@@ -19,9 +19,11 @@ builder.Services.AddDbContext<SqlServerDbContext>(
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMovementRepository, MovementRepository>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMovementService, MovementService>();
 
 var app = builder.Build();
 
