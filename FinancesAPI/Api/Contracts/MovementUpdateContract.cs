@@ -10,7 +10,5 @@ public class MovementUpdateContract
     public string? Description { get; set; }
     public MovementType Type {get; set; }
     public int CategoryId { get; set; }
-    public CategoryReadContract? Category { get; set; }
     public int UserId { get; set; }
-    public UserReadContract? User { get; set; }
 }
