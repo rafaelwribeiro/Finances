@@ -55,7 +55,7 @@ namespace FinancesAPI.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2023, 1, 14, 23, 25, 9, 720, DateTimeKind.Utc).AddTicks(3539));
+                        .HasDefaultValue(new DateTime(2023, 1, 18, 2, 36, 58, 404, DateTimeKind.Utc).AddTicks(4554));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
@@ -81,6 +81,24 @@ namespace FinancesAPI.Migrations
                     b.ToTable("Movement", (string)null);
                 });
 
+            modelBuilder.Entity("FinancesAPI.Domain.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", (string)null);
+                });
+
             modelBuilder.Entity("FinancesAPI.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -99,7 +117,12 @@ namespace FinancesAPI.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("NVARCHAR");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User", (string)null);
                 });
@@ -121,6 +144,17 @@ namespace FinancesAPI.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.User", b =>
+                {
+                    b.HasOne("FinancesAPI.Domain.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
