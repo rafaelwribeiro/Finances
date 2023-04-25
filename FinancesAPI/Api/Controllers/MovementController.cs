@@ -1,11 +1,13 @@
-using FinancesAPI.Api.Contracts;
+using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancesAPI.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class MovementController : ControllerBase
 {
     private readonly IMovementService _movementService;

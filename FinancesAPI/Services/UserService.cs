@@ -1,5 +1,5 @@
-using FinancesAPI.Api.Contracts;
-using FinancesAPI.Domain;
+using FinancesAPI.Domain.Contracts;
+using FinancesAPI.Domain.Entities;
 using FinancesAPI.Infra.Repositories;
 using Mapster;
 

@@ -1,4 +1,4 @@
-using FinancesAPI.Api.Contracts;
+using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 

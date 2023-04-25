@@ -1,6 +1,6 @@
-namespace FinancesAPI.Api.Contracts;
+namespace FinancesAPI.Domain.Entities;
 
-public class CategoryReadContract
+public class Category
 {
     public int Id { get; set; }
     public string? Name { get; set; }

@@ -1,4 +1,5 @@
 using FinancesAPI.Domain;
+using FinancesAPI.Domain.Entities;
 using FinancesAPI.Infra.Mapping;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ public class SqlServerDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Movement> Movements { get; set; }
+    public DbSet<Role> Roles { get; set; }
 
     public SqlServerDbContext(DbContextOptions<SqlServerDbContext> options) : base(options)
     {

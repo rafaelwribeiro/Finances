@@ -1,4 +1,4 @@
-using FinancesAPI.Domain;
+using FinancesAPI.Domain.Entities;
 
 namespace FinancesAPI.Infra.Repositories;
 

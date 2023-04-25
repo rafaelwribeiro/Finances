@@ -1,32 +1,32 @@
-using FinancesAPI.Api.Contracts;
+using FinancesAPI.Application.Commands.AddUser;
+using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
+using Mapster;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancesAPI.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IMediator _mediator;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, IMediator mediator)
     {
         _userService = userService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        try {
-            var list = await _userService.GetAllAsync();
-            if(list == null)
-                return NotFound();
-
-            return Ok(list);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new ListUsersCommand());
+        return Ok(result.Users);
     }
 
     [HttpGet("{id}", Name = "UserDatails")]
@@ -43,15 +43,12 @@ public class UserController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] UserCreateContract contract)
     {
-        try {
-            var user = await _userService.CreateAsync(contract);
-            return CreatedAtRoute("UserDatails", new { Id = user.Id }, user);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(contract.Adapt<AddUserCommand>());
+        return Ok(result.User);
     }
 
     [HttpDelete("{id}")]

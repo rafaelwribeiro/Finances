@@ -1,10 +1,9 @@
 using FinancesAPI.Types;
 
-namespace FinancesAPI.Api.Contracts;
+namespace FinancesAPI.Domain.Contracts;
 
-public class MovementUpdateContract
+public class MovementCreateContract
 {
-    public int Id { get; set; }
     public DateTime? Date { get; set; }
     public decimal? Value { get; set; }
     public string? Description { get; set; }

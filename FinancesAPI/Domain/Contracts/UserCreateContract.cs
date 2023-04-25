@@ -1,4 +1,4 @@
-namespace FinancesAPI.Api.Contracts;
+namespace FinancesAPI.Domain.Contracts;
 
 public class UserCreateContract
 {

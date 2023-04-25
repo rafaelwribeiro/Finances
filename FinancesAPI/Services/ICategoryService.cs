@@ -1,4 +1,4 @@
-using FinancesAPI.Api.Contracts;
+using FinancesAPI.Domain.Contracts;
 
 namespace FinancesAPI.Services;
 
