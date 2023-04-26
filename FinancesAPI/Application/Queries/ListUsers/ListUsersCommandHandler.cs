@@ -4,7 +4,7 @@ using FinancesAPI.Infra.Repositories;
 using Mapster;
 using MediatR;
 
-namespace FinancesAPI.Application.Commands.AddUser;
+namespace FinancesAPI.Application.Queries.ListUsers;
 
 public class ListUsersCommandHandler : IRequestHandler<ListUsersCommand, ListUsersCommandResult>
 {

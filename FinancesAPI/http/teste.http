@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ### GET ALL USER
 GET http://localhost:5211/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ0MTMwNywiZXhwIjoxNjgyNDcwMTA3LCJpYXQiOjE2ODI0NDEzMDd9.p1q9PqKmn2FFf3S6OKZJ7M2-pt27NJOk6GOOQ_ZSnMk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ3Mzg5NCwiZXhwIjoxNjgyNTAyNjk0LCJpYXQiOjE2ODI0NzM4OTR9.yMSlvbMktuxTJ4VjtJ1CMyCOkxqN3NdsBldalbyCUQk
 
 ### POST
 ### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjI5NTQ1NSwiZXhwIjoxNjgyMzI0MjU1LCJpYXQiOjE2ODIyOTU0NTV9.RSYe7Ewh4bjAKoQaMys9-F-4d8NFGVLJMBq6YkJlHLU
@@ -20,6 +20,23 @@ Content-Type: application/json
 
     "login": "aaa",
     "password": "aaa"
+}
+
+### DELETE
+DELETE http://localhost:5211/user/2005
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ3Mzg5NCwiZXhwIjoxNjgyNTAyNjk0LCJpYXQiOjE2ODI0NzM4OTR9.yMSlvbMktuxTJ4VjtJ1CMyCOkxqN3NdsBldalbyCUQk
+Content-Type: application/json
+
+
+### UPDATE USER
+PUT http://localhost:5211/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ3Mzg5NCwiZXhwIjoxNjgyNTAyNjk0LCJpYXQiOjE2ODI0NzM4OTR9.yMSlvbMktuxTJ4VjtJ1CMyCOkxqN3NdsBldalbyCUQk
+
+{
+    "id": 5,
+    "login": "login",
+    "password": "xxx"
 }
 
 

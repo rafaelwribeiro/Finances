@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace FinancesAPI.Application.Commands.AddUser;
+namespace FinancesAPI.Application.Queries.ListUsers;
 public class ListUsersCommand : IRequest<ListUsersCommandResult>
 {
 }

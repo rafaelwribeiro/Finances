@@ -1,6 +1,6 @@
 using FinancesAPI.Domain.Contracts;
 
-namespace FinancesAPI.Application.Commands.AddUser;
+namespace FinancesAPI.Application.Queries.ListUsers;
 
 public class ListUsersCommandResult
 {

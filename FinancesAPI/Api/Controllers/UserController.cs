@@ -1,4 +1,8 @@
 using FinancesAPI.Application.Commands.AddUser;
+using FinancesAPI.Application.Commands.DeleteUser;
+using FinancesAPI.Application.Commands.UpdateUser;
+using FinancesAPI.Application.Queries.GetUser;
+using FinancesAPI.Application.Queries.ListUsers;
 using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
 using Mapster;
@@ -32,15 +36,10 @@ public class UserController : ControllerBase
     [HttpGet("{id}", Name = "UserDatails")]
     public async Task<IActionResult> Get(int id)
     {
-        try {
-            var user = await _userService.GetAsync(id);
-            if(user == null)
-                return NotFound();
-
-            return Ok(user);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var command = new GetUserCommand();
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return Ok(result.User);
     }
 
     [AllowAnonymous]
@@ -54,32 +53,19 @@ public class UserController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        try {
-            var user = await _userService.GetAsync(id);
-            if(user == null)
-                return NotFound();
-
-            await _userService.Delete(id);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var command = new DeleteUserCommand();
+        command.Id = id;
+        var result = await _mediator.Send(command);
+        return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(UserUpdateContract contract)
     {
-        try {
-            var user = await _userService.GetAsync(contract.Id);
-            if(user == null)
-                return NotFound();
-
-            await _userService.Update(contract);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var command = new UpdateUserCommand();
+        command.Id = contract.Id;
+        command.contract = contract;
+        var result = await _mediator.Send(command);
+        return NoContent();
     }
 }
