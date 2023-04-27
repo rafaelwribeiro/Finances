@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text;
 using FinancesAPI;
+using FinancesAPI.Api.Middleware;
 using FinancesAPI.Application.Commands.AddUser;
 using FinancesAPI.Infra;
 using FinancesAPI.Infra.Repositories;
@@ -61,6 +62,8 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseMiddleware(typeof(ErrorMiddleware));
 
         app.UseHttpsRedirection();
 

@@ -3,13 +3,13 @@ POST http://localhost:5211/login
 Content-Type: application/json
 
 {
-    "UserName": "string",
-    "password": "string"
+    "UserName": "login",
+    "password": "xxx"
 }
 
 ### GET ALL USER
 GET http://localhost:5211/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ3Mzg5NCwiZXhwIjoxNjgyNTAyNjk0LCJpYXQiOjE2ODI0NzM4OTR9.yMSlvbMktuxTJ4VjtJ1CMyCOkxqN3NdsBldalbyCUQk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNTUxOTkxLCJleHAiOjE2ODI1ODA3OTEsImlhdCI6MTY4MjU1MTk5MX0.9xOL2Z66zhzAqCJpyVe9Atb8VKqxxp0cd0GOei5r6J0
 
 ### POST
 ### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjI5NTQ1NSwiZXhwIjoxNjgyMzI0MjU1LCJpYXQiOjE2ODIyOTU0NTV9.RSYe7Ewh4bjAKoQaMys9-F-4d8NFGVLJMBq6YkJlHLU
