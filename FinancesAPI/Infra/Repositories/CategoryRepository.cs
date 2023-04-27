@@ -1,4 +1,5 @@
 using FinancesAPI.Domain.Entities;
+using FinancesAPI.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinancesAPI.Infra.Repositories;

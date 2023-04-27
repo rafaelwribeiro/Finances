@@ -1,6 +1,6 @@
 using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Domain.Entities;
-using FinancesAPI.Infra.Repositories;
+using FinancesAPI.Domain.Repositories;
 using Mapster;
 
 namespace FinancesAPI.Services;

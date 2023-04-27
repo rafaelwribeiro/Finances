@@ -2,6 +2,7 @@ using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Domain;
 using FinancesAPI.Infra.Repositories;
 using Mapster;
+using FinancesAPI.Domain.Repositories;
 
 namespace FinancesAPI.Services;
 

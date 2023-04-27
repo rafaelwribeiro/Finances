@@ -1,6 +1,6 @@
 using FinancesAPI.Domain;
 
-namespace FinancesAPI.Infra.Repositories;
+namespace FinancesAPI.Domain.Repositories;
 public interface IMovementRepository
 {
     public Task<Movement> CreateAsync(Movement entity);

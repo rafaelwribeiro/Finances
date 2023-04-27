@@ -1,6 +1,6 @@
 using FinancesAPI.Domain.Entities;
 
-namespace FinancesAPI.Infra.Repositories;
+namespace FinancesAPI.Domain.Repositories;
 
 public interface IUserRepository
 {

@@ -1,6 +1,6 @@
 
 using FinancesAPI.Domain.Contracts;
-using FinancesAPI.Infra.Repositories;
+using FinancesAPI.Domain.Repositories;
 using FinancesAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
