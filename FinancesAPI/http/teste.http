@@ -8,8 +8,8 @@ Content-Type: application/json
 }
 
 ### GET ALL USER
-GET http://localhost:5211/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNTUxOTkxLCJleHAiOjE2ODI1ODA3OTEsImlhdCI6MTY4MjU1MTk5MX0.9xOL2Z66zhzAqCJpyVe9Atb8VKqxxp0cd0GOei5r6J0
+GET http://localhost:5211/user/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNjQyNDE2LCJleHAiOjE2ODI2NzEyMTYsImlhdCI6MTY4MjY0MjQxNn0.55qSras2YXFTDXgnlBmNBtU8ZEw9PTFPiAcpaM94wj0
 
 ### POST
 ### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjI5NTQ1NSwiZXhwIjoxNjgyMzI0MjU1LCJpYXQiOjE2ODIyOTU0NTV9.RSYe7Ewh4bjAKoQaMys9-F-4d8NFGVLJMBq6YkJlHLU
@@ -17,7 +17,6 @@ POST http://localhost:5211/user
 Content-Type: application/json
 
 {
-
     "login": "aaa",
     "password": "aaa"
 }

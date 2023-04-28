@@ -1,4 +1,5 @@
 using FinancesAPI.Domain.Entities;
+using FinancesAPI.Domain.Exceptions;
 using FinancesAPI.Domain.Repositories;
 using Mapster;
 using MediatR;
@@ -19,6 +20,8 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Delet
         var user =  request.Adapt<User>();
 
         user = await _userRepository.GetAsync(request.Id);
+        if(user == null)
+            throw new NotFoundException();
 
         await _userRepository.DeleteAsync(user);
 

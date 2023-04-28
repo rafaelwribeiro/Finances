@@ -1,3 +1,4 @@
+using FinancesAPI.Domain.Exceptions;
 using FinancesAPI.Domain.Repositories;
 using Mapster;
 using MediatR;
@@ -17,6 +18,9 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Updat
     {
         
         var user = await _userRepository.GetAsync(request.Id);
+
+        if(user == null)
+            throw new NotFoundException();
 
         request.contract.Adapt(user);
 

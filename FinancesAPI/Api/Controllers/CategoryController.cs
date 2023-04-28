@@ -1,89 +1,61 @@
+using FinancesAPI.Application.Commands.AddCategory;
+using FinancesAPI.Application.Commands.DeleteCategory;
+using FinancesAPI.Application.Commands.UpdateCategory;
+using FinancesAPI.Application.Queries.GetCategory;
+using FinancesAPI.Application.Queries.ListCategories;
 using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancesAPI.Api.Controller;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly ICategoryService _categoryService;
-
-    public CategoryController(ICategoryService categoryService)
+    private readonly IMediator _mediator;
+    public CategoryController(IMediator mediator)
     {
-        _categoryService = categoryService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        try {
-            var list = await _categoryService.GetAllAsync();
-            if(list == null)
-                return NotFound();
-
-            return Ok(list);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var list = await _mediator.Send(new ListCategoriesCommand());
+        return Ok(list);
     }
 
     [HttpGet("{id}", Name = "CategoryDatails")]
     public async Task<IActionResult> Get(int id)
     {
-        try {
-            var category = await _categoryService.GetAsync(id);
-            if(category == null)
-                return NotFound();
-
-            return Ok(category);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var category = await _mediator.Send(new GetCategoryCommand(id));
+        return Ok(category);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CategoryCreateContract contract)
     {
-        try {
-            var category = await _categoryService.CreateAsync(contract);
-            return CreatedAtRoute("CategoryDatails", new { Id = category.Id }, category);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new AddCategoryCommand(contract));
+        var category = result.Category;
+        return CreatedAtRoute("CategoryDatails", new { Id = category?.Id }, category);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        try {
-            var category = await _categoryService.GetAsync(id);
-            if(category == null)
-                return NotFound();
-
-            await _categoryService.Delete(id);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        await _mediator.Send(new DeleteCategoryCommand(id));
+        return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(CategoryUpdateContract contract)
     {
-        try {
-            var category = await _categoryService.GetAsync(contract.Id);
-            if(category == null)
-                return NotFound();
-
-            await _categoryService.Update(contract);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        await _mediator.Send(new UpdateCategoryCommand(contract.Id, contract));
+        return NoContent();
     }
 
 }

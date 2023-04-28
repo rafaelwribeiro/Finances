@@ -1,4 +1,5 @@
 using FinancesAPI.Domain.Contracts;
+using FinancesAPI.Domain.Exceptions;
 using FinancesAPI.Domain.Repositories;
 using Mapster;
 using MediatR;
@@ -16,10 +17,13 @@ public class GetUserCommandHandler : IRequestHandler<GetUserCommand, GetUserComm
 
     public async Task<GetUserCommandResult> Handle(GetUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetAsync(request.Id);
+        var entity = await _userRepository.GetAsync(request.Id);
+
+        if(entity == null)
+            throw new NotFoundException();
 
         var result = new GetUserCommandResult();
-        result.User = user.Adapt<UserReadContract>();
+        result.User = entity.Adapt<UserReadContract>();
 
         return result;
     }

@@ -23,7 +23,6 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, AddUserComm
 
         var result = new AddUserCommandResult();
         result.User = user.Adapt<UserReadContract>();
-
         return result;
     }
 }

@@ -49,8 +49,6 @@ public class Program
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IMovementRepository, MovementRepository>();
 
-        builder.Services.AddScoped<ICategoryService, CategoryService>();
-        builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IMovementService, MovementService>();
         builder.Services.AddTransient<TokenService>();
 
