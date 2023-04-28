@@ -4,7 +4,6 @@ using FinancesAPI.Application.Commands.UpdateCategory;
 using FinancesAPI.Application.Queries.GetCategory;
 using FinancesAPI.Application.Queries.ListCategories;
 using FinancesAPI.Domain.Contracts;
-using FinancesAPI.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

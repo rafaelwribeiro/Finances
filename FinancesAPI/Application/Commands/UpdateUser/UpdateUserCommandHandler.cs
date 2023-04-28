@@ -22,7 +22,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Updat
         if(user == null)
             throw new NotFoundException();
 
-        request.contract.Adapt(user);
+        request.Contract.Adapt(user);
 
         await _userRepository.UpdateAsync(user);
 

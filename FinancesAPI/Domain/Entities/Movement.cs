@@ -1,7 +1,7 @@
 using FinancesAPI.Domain.Entities;
 using FinancesAPI.Types;
 
-namespace FinancesAPI.Domain;
+namespace FinancesAPI.Domain.Entities;
 
 public class Movement
 {

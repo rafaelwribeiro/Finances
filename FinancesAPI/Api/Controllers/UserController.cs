@@ -4,7 +4,6 @@ using FinancesAPI.Application.Commands.UpdateUser;
 using FinancesAPI.Application.Queries.GetUser;
 using FinancesAPI.Application.Queries.ListUsers;
 using FinancesAPI.Domain.Contracts;
-using FinancesAPI.Services;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -34,9 +33,7 @@ public class UserController : ControllerBase
     [HttpGet("{id}", Name = "UserDatails")]
     public async Task<IActionResult> Get(int id)
     {
-        var command = new GetUserCommand();
-        command.Id = id;
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(new GetUserCommand(id));
         return Ok(result.User);
     }
 
@@ -51,19 +48,14 @@ public class UserController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var command = new DeleteUserCommand();
-        command.Id = id;
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(new DeleteUserCommand(id));
         return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(UserUpdateContract contract)
     {
-        var command = new UpdateUserCommand();
-        command.Id = contract.Id;
-        command.contract = contract;
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(new UpdateUserCommand(contract.Id, contract));
         return NoContent();
     }
 }

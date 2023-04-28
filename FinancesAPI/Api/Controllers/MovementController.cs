@@ -1,5 +1,11 @@
+using FinancesAPI.Application.Commands.AddMovement;
+using FinancesAPI.Application.Commands.DeleteMovement;
+using FinancesAPI.Application.Commands.UpdateMovement;
+using FinancesAPI.Application.Queries.GetMovement;
+using FinancesAPI.Application.Queries.ListMovements;
 using FinancesAPI.Domain.Contracts;
 using FinancesAPI.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,78 +16,43 @@ namespace FinancesAPI.Api.Controllers;
 [Authorize]
 public class MovementController : ControllerBase
 {
-    private readonly IMovementService _movementService;
+    private readonly IMediator _mediator;
 
-    public MovementController(IMovementService movementService) => _movementService = movementService;
+    public MovementController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        try {
-            var list = await _movementService.GetAllAsync();
-            if(list == null)
-                return NotFound();
-
-            return Ok(list);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var list = await _mediator.Send(new ListMovementsCommand());
+        return Ok(list);
     }
 
     [HttpGet("{id}", Name = "MovementDatails")]
     public async Task<IActionResult> Get(int id)
     {
-        try {
-            var movement = await _movementService.GetAsync(id);
-            if(movement == null)
-                return NotFound();
-
-            return Ok(movement);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new GetMovementCommand(id));
+        return Ok(result.Movement);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] MovementCreateContract contract)
     {
-        try {
-            var movement = await _movementService.CreateAsync(contract);
-            return CreatedAtRoute("MovementDatails", new { Id = movement.Id }, movement);
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new AddMovementCommand(contract));
+        var movement = result.Movement;
+        return CreatedAtRoute("MovementDatails", new { Id = movement?.Id }, movement);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        try {
-            var movement = await _movementService.GetAsync(id);
-            if(movement == null)
-                return NotFound();
-
-            await _movementService.Delete(id);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new DeleteMovementCommand(id));
+        return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(MovementUpdateContract contract)
     {
-        try {
-            var movement = await _movementService.GetAsync(contract.Id);
-            if(movement == null)
-                return NotFound();
-
-            await _movementService.Update(contract);
-
-            return NoContent();
-        } catch(Exception ex) {
-            return StatusCode(500, $" Erro -->.. {ex.Message}");
-        }
+        var result = await _mediator.Send(new UpdateMovementCommand(contract.Id, contract));
+        return NoContent();
     }
 }

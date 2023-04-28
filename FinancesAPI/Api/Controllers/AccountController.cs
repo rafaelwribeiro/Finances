@@ -34,8 +34,8 @@ public class AccountController : ControllerBase
 
     //[HttpGet("user")]
     //public IActionResult GetUser() => Ok(User.Identity.Name);
-    [HttpGet("author")]
+    /*[HttpGet("author")]
     public IActionResult GetAuthor() => Ok(User.Identity.Name);
     [HttpGet("admin")]
-    public IActionResult GetAdmin() => Ok(User.Identity.Name);
+    public IActionResult GetAdmin() => Ok(User.Identity.Name);*/
 }

@@ -4,5 +4,5 @@ namespace FinancesAPI.Application.Commands.AddUser;
 
 public class AddUserCommandResult
 {
-    public UserReadContract User { get; set; }
+    public UserReadContract? User { get; set; }
 }
