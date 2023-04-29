@@ -1,7 +1,5 @@
-using FinancesAPI.Domain.Entities;
 using FinancesAPI.Domain.Exceptions;
 using FinancesAPI.Domain.Repositories;
-using Mapster;
 using MediatR;
 
 namespace FinancesAPI.Application.Commands.DeleteCategory;
@@ -24,8 +22,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
         if(entity == null)
             throw new NotFoundException();
 
-        var movementWithThisCategory = await _movementRepository.GetByCategoryAsync(entity.Id);
-        if(movementWithThisCategory != null)
+        if(await _movementRepository.IsThereWithCategoryAsync(entity.Id))
             throw new BusinessLogicException("There is one or more Movements using this category");
 
         await _categoryRepository.DeleteAsync(entity);

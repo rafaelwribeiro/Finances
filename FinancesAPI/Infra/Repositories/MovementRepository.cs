@@ -42,13 +42,12 @@ public class MovementRepository : IMovementRepository
             .Include(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == id);
 
-    public async Task<Movement?> GetByCategoryAsync(int categoryId)
-        =>
-        await _dbContext
+    public async Task<bool> IsThereWithCategoryAsync(int categoryId)
+    {
+        return await _dbContext
             .Movements
-            .Include(x => x.Category)
-            .Include(x => x.User)
-            .FirstOrDefaultAsync(x => x.CategoryId == categoryId);
+            .FirstOrDefaultAsync(x => x.CategoryId == categoryId) != null;
+    }
 
     public async Task UpdateAsync(Movement entity)
     {
