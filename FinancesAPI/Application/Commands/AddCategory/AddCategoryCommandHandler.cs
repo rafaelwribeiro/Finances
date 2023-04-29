@@ -17,7 +17,7 @@ public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, Add
 
     public async Task<AddCategoryCommandResult> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
     {
-        var entity =  request.Adapt<Category>();
+        var entity =  request._contract.Adapt<Category>();
 
         entity = await _categoryRepository.CreateAsync(entity);
 

@@ -27,16 +27,26 @@ public class ErrorMiddleware
 
     private Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        if(ex is NotFoundException)
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-        
-
         var error = new ErrorContract();
-        error.StatusCode = context.Response.StatusCode;
         error.Message = $"{ex.Message} {ex?.InnerException?.Message}";
+
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = "application/json";
+
+        if(ex is NotFoundException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            error.Message = "Entity not found";
+        }
+
+        if(ex is BusinessLogicException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            error.Message = ex.Message;
+        }
+
+        error.StatusCode = context.Response.StatusCode;
         var result = JsonConvert.SerializeObject(error);
-            context.Response.ContentType = "application/json";
-            return context.Response.WriteAsync(result);
+        return context.Response.WriteAsync(result);
     }
 }

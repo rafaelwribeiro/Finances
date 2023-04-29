@@ -4,7 +4,6 @@ using FinancesAPI.Application.Commands.UpdateMovement;
 using FinancesAPI.Application.Queries.GetMovement;
 using FinancesAPI.Application.Queries.ListMovements;
 using FinancesAPI.Domain.Contracts;
-using FinancesAPI.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

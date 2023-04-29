@@ -1,0 +1,35 @@
+### GET ALL MOVEMENTS
+GET http://localhost:5211/movement
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzkxNTk3LCJleHAiOjE2ODI4MjAzOTcsImlhdCI6MTY4Mjc5MTU5N30.qPJoXTcJKyvyEdg3b7J7_hP1jao6GqYUXX7uYkvKDkQ
+
+### NEW MOVEMENT
+POST http://localhost:5211/movement
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzgwMDU4LCJleHAiOjE2ODI4MDg4NTgsImlhdCI6MTY4Mjc4MDA1OH0.ujaXqN9rt8hhE8FaoEgN4hNQA2g8Yts0xhKHGh6kxMc
+Content-Type: application/json
+
+{
+  "date": "2023-04-29T01:53:27.297Z",
+  "value": 150,
+  "description": "agua",
+  "type": 1,
+  "categoryId": 5,
+  "userId": 2
+}
+
+###
+# 0 - credit
+# 1 - debit
+### EDIT
+PUT http://localhost:5211/movement
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzgwMDU4LCJleHAiOjE2ODI4MDg4NTgsImlhdCI6MTY4Mjc4MDA1OH0.ujaXqN9rt8hhE8FaoEgN4hNQA2g8Yts0xhKHGh6kxMc
+Content-Type: application/json
+
+{
+  "id": 2,
+  "date": "2023-04-29T01:53:27.297Z",
+  "value": 7400,
+  "description": "Recebimento",
+  "type": 0,
+  "categoryId": 1,
+  "userId": 2
+}

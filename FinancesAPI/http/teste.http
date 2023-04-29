@@ -8,8 +8,8 @@ Content-Type: application/json
 }
 
 ### GET ALL USER
-GET http://localhost:5211/user/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNjQyNDE2LCJleHAiOjE2ODI2NzEyMTYsImlhdCI6MTY4MjY0MjQxNn0.55qSras2YXFTDXgnlBmNBtU8ZEw9PTFPiAcpaM94wj0
+GET http://localhost:5211/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzMyNzk5LCJleHAiOjE2ODI3NjE1OTksImlhdCI6MTY4MjczMjc5OX0.ZIEuYvKYJEZnUtCNGNKTa51e-xwY-471AnbFHEuuvJE
 
 ### POST
 ### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjI5NTQ1NSwiZXhwIjoxNjgyMzI0MjU1LCJpYXQiOjE2ODIyOTU0NTV9.RSYe7Ewh4bjAKoQaMys9-F-4d8NFGVLJMBq6YkJlHLU
@@ -37,10 +37,3 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
     "login": "login",
     "password": "xxx"
 }
-
-
-### GET ALL MOVEMENTS
-GET http://localhost:5211/movement
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjQ0MTMwNywiZXhwIjoxNjgyNDcwMTA3LCJpYXQiOjE2ODI0NDEzMDd9.p1q9PqKmn2FFf3S6OKZJ7M2-pt27NJOk6GOOQ_ZSnMk
-
-

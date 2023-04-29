@@ -42,6 +42,14 @@ public class MovementRepository : IMovementRepository
             .Include(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == id);
 
+    public async Task<Movement?> GetByCategoryAsync(int categoryId)
+        =>
+        await _dbContext
+            .Movements
+            .Include(x => x.Category)
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.CategoryId == categoryId);
+
     public async Task UpdateAsync(Movement entity)
     {
         _dbContext.Movements.Update(entity);

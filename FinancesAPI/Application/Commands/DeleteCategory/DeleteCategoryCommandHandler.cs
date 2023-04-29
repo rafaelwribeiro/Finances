@@ -9,10 +9,12 @@ namespace FinancesAPI.Application.Commands.DeleteCategory;
 public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryCommandResult>
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IMovementRepository _movementRepository;
 
-    public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
+    public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository, IMovementRepository movementRepository)
     {
         _categoryRepository = categoryRepository;
+        _movementRepository = movementRepository;
     }
 
     public async Task<DeleteCategoryCommandResult> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
@@ -21,6 +23,10 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
         if(entity == null)
             throw new NotFoundException();
+
+        var movementWithThisCategory = await _movementRepository.GetByCategoryAsync(entity.Id);
+        if(movementWithThisCategory != null)
+            throw new BusinessLogicException("There is one or more Movements using this category");
 
         await _categoryRepository.DeleteAsync(entity);
 
