@@ -48,4 +48,9 @@ public class UserRepository : IUserRepository
         _dbContext.Users.Update(entity);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<bool> UserNameAlreadyInUse(string userName)
+    {
+        return await _dbContext.Users.AnyAsync(x => x.Login == userName);
+    }
 }

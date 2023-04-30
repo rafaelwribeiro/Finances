@@ -46,7 +46,7 @@ public class MovementRepository : IMovementRepository
     {
         return await _dbContext
             .Movements
-            .FirstOrDefaultAsync(x => x.CategoryId == categoryId) != null;
+            .AnyAsync(x => x.CategoryId == categoryId);
     }
 
     public async Task UpdateAsync(Movement entity)

@@ -8,6 +8,7 @@ public interface IUserRepository
     public Task<IEnumerable<User>> GetAllAsync();
     public Task<User?> GetAsync(int id);
     public Task<User?> GetByUserName(string userName);
+    public Task<bool> UserNameAlreadyInUse(string userName);
     public Task UpdateAsync(User entity);
     public Task DeleteAsync(User entity);
 }
