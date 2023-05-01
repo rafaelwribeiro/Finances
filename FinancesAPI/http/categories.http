@@ -1,5 +1,5 @@
 GET http://localhost:5211/category
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzkxNTk3LCJleHAiOjE2ODI4MjAzOTcsImlhdCI6MTY4Mjc5MTU5N30.qPJoXTcJKyvyEdg3b7J7_hP1jao6GqYUXX7uYkvKDkQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgyMjQyLCJleHAiOjE2ODMwMTEwNDIsImlhdCI6MTY4Mjk4MjI0Mn0.obDxQOzg9whxwmbMvALMkGYtoW3AryX693Dq9sua1Kw
 
 ###
 DELETE  http://localhost:5211/category/3
@@ -7,9 +7,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
 
 ###
 POST  http://localhost:5211/category
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzkxNTk3LCJleHAiOjE2ODI4MjAzOTcsImlhdCI6MTY4Mjc5MTU5N30.qPJoXTcJKyvyEdg3b7J7_hP1jao6GqYUXX7uYkvKDkQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgyMjQyLCJleHAiOjE2ODMwMTEwNDIsImlhdCI6MTY4Mjk4MjI0Mn0.obDxQOzg9whxwmbMvALMkGYtoW3AryX693Dq9sua1Kw
 Content-Type: application/json
 
 {
-    "Name": "CUSTOS FIXOS"
+    "Name": "RENDIMENTOS",
+    "Type": 1
 }
