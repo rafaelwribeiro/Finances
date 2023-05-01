@@ -1,18 +1,18 @@
 ### GET ALL MOVEMENTS
-GET http://localhost:5211/movement
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzkxNTk3LCJleHAiOjE2ODI4MjAzOTcsImlhdCI6MTY4Mjc5MTU5N30.qPJoXTcJKyvyEdg3b7J7_hP1jao6GqYUXX7uYkvKDkQ
+GET http://localhost:5211/movement/1006
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTYzNDM2LCJleHAiOjE2ODI5OTIyMzYsImlhdCI6MTY4Mjk2MzQzNn0.wC_4qhABpqNBcRDvO65qzYqR2-WIglg0y_Y9JpclbB8
 
 ### NEW MOVEMENT
 POST http://localhost:5211/movement
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzgwMDU4LCJleHAiOjE2ODI4MDg4NTgsImlhdCI6MTY4Mjc4MDA1OH0.ujaXqN9rt8hhE8FaoEgN4hNQA2g8Yts0xhKHGh6kxMc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTYzNDM2LCJleHAiOjE2ODI5OTIyMzYsImlhdCI6MTY4Mjk2MzQzNn0.wC_4qhABpqNBcRDvO65qzYqR2-WIglg0y_Y9JpclbB8
 Content-Type: application/json
 
 {
-  "date": "2023-04-29T01:53:27.297Z",
-  "value": 150,
-  "description": "agua",
+  "date": "2023-05-01T17:51:27.297Z",
+  "value": 10,
+  "description": "Coca cola",
   "type": 1,
-  "categoryId": 5,
+  "categoryId": 3,
   "userId": 2
 }
 
@@ -21,15 +21,14 @@ Content-Type: application/json
 # 1 - debit
 ### EDIT
 PUT http://localhost:5211/movement
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzgwMDU4LCJleHAiOjE2ODI4MDg4NTgsImlhdCI6MTY4Mjc4MDA1OH0.ujaXqN9rt8hhE8FaoEgN4hNQA2g8Yts0xhKHGh6kxMc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTYzNDM2LCJleHAiOjE2ODI5OTIyMzYsImlhdCI6MTY4Mjk2MzQzNn0.wC_4qhABpqNBcRDvO65qzYqR2-WIglg0y_Y9JpclbB8
 Content-Type: application/json
 
 {
-  "id": 2,
-  "date": "2023-04-29T01:53:27.297Z",
-  "value": 7400,
-  "description": "Recebimento",
-  "type": 0,
-  "categoryId": 1,
-  "userId": 2
+  "id": 1006,
+  "date": "2023-05-01T17:51:27.297Z",
+  "value": 80,
+  "description": "Futebas na praça",
+  "type": 1,
+  "categoryId": 3
 }

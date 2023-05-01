@@ -36,7 +36,7 @@ public class MovementController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] MovementCreateContract contract)
     {
-        var result = await _mediator.Send(new AddMovementCommand(contract));
+        var result = await _mediator.Send(new AddMovementCommand(User?.Identity?.Name ?? "", contract));
         var movement = result.Movement;
         return CreatedAtRoute("MovementDatails", new { Id = movement?.Id }, movement);
     }

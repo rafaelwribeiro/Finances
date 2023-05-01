@@ -4,10 +4,12 @@ using MediatR;
 namespace FinancesAPI.Application.Commands.AddMovement;
 public class AddMovementCommand : IRequest<AddMovementCommandResult>
 {
-    public MovementCreateContract _contract { get; set; }
+    public string Login { get; set; }
+    public MovementCreateContract Contract { get; set; }
 
-    public AddMovementCommand(MovementCreateContract contract)
+    public AddMovementCommand(string login, MovementCreateContract contract)
     {
-        _contract = contract;
+        Login = login;
+        Contract = contract;
     }
 }

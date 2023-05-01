@@ -8,16 +8,16 @@ namespace FinancesAPI.Application.Queries.GetMovement;
 
 public class GetMovementCommandHandler : IRequestHandler<GetMovementCommand, GetMovementCommandResult>
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly IMovementRepository _movementRepository;
 
-    public GetMovementCommandHandler(ICategoryRepository categoryRepository)
+    public GetMovementCommandHandler(IMovementRepository movementRepository)
     {
-        _categoryRepository = categoryRepository;
+        _movementRepository = movementRepository;
     }
 
     public async Task<GetMovementCommandResult> Handle(GetMovementCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _categoryRepository.GetAsync(request.Id);
+        var entity = await _movementRepository.GetAsync(request.Id);
 
         if(entity == null)
             throw new NotFoundException();
