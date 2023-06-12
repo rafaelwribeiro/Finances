@@ -2,8 +2,8 @@ GET http://localhost:5211/category
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgyMjQyLCJleHAiOjE2ODMwMTEwNDIsImlhdCI6MTY4Mjk4MjI0Mn0.obDxQOzg9whxwmbMvALMkGYtoW3AryX693Dq9sua1Kw
 
 ###
-DELETE  http://localhost:5211/category/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyNzkxNTk3LCJleHAiOjE2ODI4MjAzOTcsImlhdCI6MTY4Mjc5MTU5N30.qPJoXTcJKyvyEdg3b7J7_hP1jao6GqYUXX7uYkvKDkQ
+DELETE  http://localhost:5211/category/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgzMzQ0LCJleHAiOjE2ODMwMTIxNDQsImlhdCI6MTY4Mjk4MzM0NH0.QeMy4WHdxVbEsWOif6GsFKeqPaRSzbprk8PJju0i8lw
 
 ###
 POST  http://localhost:5211/category

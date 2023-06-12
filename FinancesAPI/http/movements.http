@@ -1,6 +1,6 @@
 ### GET ALL MOVEMENTS
-GET http://localhost:5211/movement/1006
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTYzNDM2LCJleHAiOjE2ODI5OTIyMzYsImlhdCI6MTY4Mjk2MzQzNn0.wC_4qhABpqNBcRDvO65qzYqR2-WIglg0y_Y9JpclbB8
+GET http://localhost:5211/movement/1007
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgyMjQyLCJleHAiOjE2ODMwMTEwNDIsImlhdCI6MTY4Mjk4MjI0Mn0.obDxQOzg9whxwmbMvALMkGYtoW3AryX693Dq9sua1Kw
 
 ### NEW MOVEMENT
 POST http://localhost:5211/movement
@@ -19,14 +19,13 @@ Content-Type: application/json
 # 1 - debit
 ### EDIT
 PUT http://localhost:5211/movement
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTYzNDM2LCJleHAiOjE2ODI5OTIyMzYsImlhdCI6MTY4Mjk2MzQzNn0.wC_4qhABpqNBcRDvO65qzYqR2-WIglg0y_Y9JpclbB8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyOTgyMjQyLCJleHAiOjE2ODMwMTEwNDIsImlhdCI6MTY4Mjk4MjI0Mn0.obDxQOzg9whxwmbMvALMkGYtoW3AryX693Dq9sua1Kw
 Content-Type: application/json
 
 {
-  "id": 1006,
-  "date": "2023-05-01T17:51:27.297Z",
-  "value": 80,
-  "description": "Futebas na praça",
-  "type": 1,
-  "categoryId": 3
+  "id": 1007,
+  "date": "2023-05-01T23:05:27.297",
+  "value": 5.97,
+  "description": "[FII] MXRF11",
+  "categoryId": 7
 }

@@ -40,8 +40,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        var strCon = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
         builder.Services.AddDbContext<SqlServerDbContext>(
-            opt => opt.UseSqlServer("Data Source=localhost;Initial Catalog=finances;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True")
+            //opt => opt.UseSqlServer("Data Source=localhost;Initial Catalog=finances;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True")
+            opt => opt.UseMySQL(strCon)
         );
 
 
