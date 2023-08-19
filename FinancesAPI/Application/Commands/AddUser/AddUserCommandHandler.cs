@@ -21,7 +21,7 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, AddUserComm
         var user =  request.Adapt<User>();
 
         if(await _userRepository.UserNameAlreadyInUse(user.Login))
-            throw new BusinessLogicException("UserName is already in use");
+            throw new BusinessLogicException("Login is already in use");
 
         user = await _userRepository.CreateAsync(user);
 

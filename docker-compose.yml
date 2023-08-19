@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  mysqldb:
+    image: mysql:5.7
+    container_name: some-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - C:/dev/data:/var/lib/mysql    
+    ports:
+      - "3306:3306"
+    restart: always
+  api:
+    build: "./FinancesAPI"
+    container_name: financesapi-container
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mysqldb;DataBase=Finances;Uid=root;Pwd=root
+    restart: always
+    ports:
+      - "5211:5211"
+      - "5000:80"
+    depends_on:
+      - mysqldb

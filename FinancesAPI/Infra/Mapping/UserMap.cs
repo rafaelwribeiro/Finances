@@ -1,6 +1,7 @@
 using FinancesAPI.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MySql.EntityFrameworkCore.Metadata;
 
 namespace FinancesAPI.Infra.Mapping;
 
@@ -12,9 +13,11 @@ public class UserMap : IEntityTypeConfiguration<User>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Id)
+        /*builder.Property(x => x.Id)
             .ValueGeneratedOnAdd()
-            .UseIdentityColumn();
+            .HasAnnotation("MySql:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);*/
+        builder.Property(x => x.Id)
+            .HasAnnotation("MySql:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
 
         builder.Property(x => x.Login)
             .IsRequired()

@@ -4,6 +4,7 @@ using FinancesAPI.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MySql.EntityFrameworkCore.Metadata;
 
@@ -12,9 +13,11 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace FinancesAPI.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230814000228_user_auto_increment")]
+    partial class userautoincrement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace FinancesAPI.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2023, 8, 14, 0, 4, 54, 173, DateTimeKind.Utc).AddTicks(495));
+                        .HasDefaultValue(new DateTime(2023, 8, 14, 0, 2, 28, 292, DateTimeKind.Utc).AddTicks(9610));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)

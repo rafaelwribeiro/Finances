@@ -4,17 +4,19 @@ using FinancesAPI.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
 namespace FinancesAPI.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230813235508_forceupdate")]
+    partial class forceupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,7 @@ namespace FinancesAPI.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2023, 8, 14, 0, 4, 54, 173, DateTimeKind.Utc).AddTicks(495));
+                        .HasDefaultValue(new DateTime(2023, 8, 13, 23, 55, 8, 627, DateTimeKind.Utc).AddTicks(1171));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
@@ -106,7 +108,9 @@ namespace FinancesAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Login")
                         .IsRequired()

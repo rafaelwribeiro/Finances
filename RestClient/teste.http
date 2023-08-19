@@ -1,1 +1,23 @@
-POST http://localhost:5211/login
+### login
+POST http://localhost:5000/login
+Accept: */*
+Content-Type: application/json
+
+{
+  "userName": "rwribeiro",
+  "password": "123"
+}
+
+### create user
+POST http://localhost:5000/user
+Accept: */*
+Content-Type: application/json
+
+{
+  "Login": "teste",
+  "password": "123"
+}
+
+### list users
+GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InJ3cmliZWlybyIsIm5iZiI6MTY5MTk3MDM0OCwiZXhwIjoxNjkxOTk5MTQ4LCJpYXQiOjE2OTE5NzAzNDh9.7HvgVrC_L8Tnj9gs5xpwpWRPO4ovVeTfNDtNIf-UeXo

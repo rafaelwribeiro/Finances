@@ -1,15 +1,15 @@
 ### GENERATE TOKEN
-POST http://localhost:5211/login
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "UserName": "login",
-    "password": "xxx"
+    "UserName": "admin",
+    "password": "admin"
 }
 
 ### GET ALL USER
-GET http://localhost:5211/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvZ2luIiwibmJmIjoxNjgyODI0Mjg3LCJleHAiOjE2ODI4NTMwODcsImlhdCI6MTY4MjgyNDI4N30.oy-488ojkRAghx-UnGcW2vvFT0S047RP6dHOaJiZgxY
+GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InJ3cmliZWlybyIsIm5iZiI6MTY4OTEyNzgxNSwiZXhwIjoxNjg5MTU2NjE1LCJpYXQiOjE2ODkxMjc4MTV9.gEl1hdHWOww_1yRy8PiQzIF4NbrDn8TdZ0TvGZu5HBg
 
 ### POST
 ### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN0cmluZyIsIm5iZiI6MTY4MjI5NTQ1NSwiZXhwIjoxNjgyMzI0MjU1LCJpYXQiOjE2ODIyOTU0NTV9.RSYe7Ewh4bjAKoQaMys9-F-4d8NFGVLJMBq6YkJlHLU
