@@ -6,27 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FinancesAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class UserStatus : Migration
+    public partial class StatusGroup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "Date",
+                table: "Movements",
+                type: "DATETIME",
+                nullable: false,
+                defaultValue: new DateTime(2023, 8, 23, 0, 0, 20, 129, DateTimeKind.Utc).AddTicks(6722),
+                oldClrType: typeof(DateTime),
+                oldType: "DATETIME",
+                oldDefaultValue: new DateTime(2023, 8, 22, 17, 57, 40, 746, DateTimeKind.Utc).AddTicks(5017));
+
             migrationBuilder.AddColumn<int>(
                 name: "Status",
-                table: "User",
+                table: "Groups",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "Movement",
-                type: "DATETIME",
-                nullable: false,
-                defaultValue: new DateTime(2023, 5, 1, 17, 43, 0, 623, DateTimeKind.Utc).AddTicks(2518),
-                oldClrType: typeof(DateTime),
-                oldType: "DATETIME",
-                oldDefaultValue: new DateTime(2023, 1, 18, 2, 36, 58, 404, DateTimeKind.Utc).AddTicks(4554));
         }
 
         /// <inheritdoc />
@@ -34,17 +34,17 @@ namespace FinancesAPI.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Status",
-                table: "User");
+                table: "Groups");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
-                table: "Movement",
+                table: "Movements",
                 type: "DATETIME",
                 nullable: false,
-                defaultValue: new DateTime(2023, 1, 18, 2, 36, 58, 404, DateTimeKind.Utc).AddTicks(4554),
+                defaultValue: new DateTime(2023, 8, 22, 17, 57, 40, 746, DateTimeKind.Utc).AddTicks(5017),
                 oldClrType: typeof(DateTime),
                 oldType: "DATETIME",
-                oldDefaultValue: new DateTime(2023, 5, 1, 17, 43, 0, 623, DateTimeKind.Utc).AddTicks(2518));
+                oldDefaultValue: new DateTime(2023, 8, 23, 0, 0, 20, 129, DateTimeKind.Utc).AddTicks(6722));
         }
     }
 }

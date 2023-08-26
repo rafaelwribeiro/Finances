@@ -8,7 +8,7 @@ public class MovementMap : IEntityTypeConfiguration<Movement>
 {
     public void Configure(EntityTypeBuilder<Movement> builder)
     {
-        builder.ToTable("Movement");
+        builder.ToTable("Movements");
 
         builder.HasKey(x => x.Id);
 
@@ -32,6 +32,7 @@ public class MovementMap : IEntityTypeConfiguration<Movement>
             .HasPrecision(10, 2);
 
         builder.HasOne(x => x.Category);
+        builder.HasOne(x => x.Group);
 
 
         builder.HasOne(x => x.User);

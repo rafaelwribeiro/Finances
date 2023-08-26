@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinancesAPI.Infra.Mapping;
 
-public class CategoryMap : IEntityTypeConfiguration<Category>
+public class GroupMap : IEntityTypeConfiguration<Group>
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
+    public void Configure(EntityTypeBuilder<Group> builder)
     {
-        builder.ToTable("Categories");
+        builder.ToTable("Groups");
 
         // Primary Key
         builder.HasKey(x => x.Id);
@@ -25,6 +25,10 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
             .HasColumnType("NVARCHAR")
             .HasMaxLength(80);
 
-        builder.HasOne(x => x.Group);
+        builder.HasOne(x => x.Owner);
+
+        builder.HasMany(a => a.Subscriptions)
+            .WithOne(b => b.Group)
+            .HasForeignKey(b => b.GroupId);
     }
 }

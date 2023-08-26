@@ -9,5 +9,5 @@ public class User
     public string Password { get; set; } = "";
     public int RoleId { get; set; }
     public Role? Role { get; set; }
-    public UserStatus Status { get; set; } = UserStatus.WaitingApprovement;
+    public UserStatus Status { get; set; } = UserStatus.PendingApproval;
 }

@@ -6,14 +6,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
 namespace FinancesAPI.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    [Migration("20230813235508_forceupdate")]
-    partial class forceupdate
+    [Migration("20230823000020_StatusGroup")]
+    partial class StatusGroup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +33,9 @@ namespace FinancesAPI.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -42,7 +46,36 @@ namespace FinancesAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Group", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("FinancesAPI.Domain.Entities.Movement", b =>
@@ -61,11 +94,14 @@ namespace FinancesAPI.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2023, 8, 13, 23, 55, 8, 627, DateTimeKind.Utc).AddTicks(1171));
+                        .HasDefaultValue(new DateTime(2023, 8, 23, 0, 0, 20, 129, DateTimeKind.Utc).AddTicks(6722));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -79,9 +115,11 @@ namespace FinancesAPI.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Movement", (string)null);
+                    b.ToTable("Movements", (string)null);
                 });
 
             modelBuilder.Entity("FinancesAPI.Domain.Entities.Role", b =>
@@ -103,7 +141,7 @@ namespace FinancesAPI.Migrations
                     b.ToTable("Roles", (string)null);
                 });
 
-            modelBuilder.Entity("FinancesAPI.Domain.Entities.User", b =>
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Subscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,6 +149,28 @@ namespace FinancesAPI.Migrations
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Subscriptions", (string)null);
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -132,7 +192,29 @@ namespace FinancesAPI.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Category", b =>
+                {
+                    b.HasOne("FinancesAPI.Domain.Entities.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Group", b =>
+                {
+                    b.HasOne("FinancesAPI.Domain.Entities.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("FinancesAPI.Domain.Entities.Movement", b =>
@@ -143,6 +225,12 @@ namespace FinancesAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FinancesAPI.Domain.Entities.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FinancesAPI.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -150,6 +238,27 @@ namespace FinancesAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Subscription", b =>
+                {
+                    b.HasOne("FinancesAPI.Domain.Entities.Group", "Group")
+                        .WithMany("Subscriptions")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinancesAPI.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
 
                     b.Navigation("User");
                 });
@@ -163,6 +272,11 @@ namespace FinancesAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("FinancesAPI.Domain.Entities.Group", b =>
+                {
+                    b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618
         }

@@ -36,7 +36,7 @@ public class ErrorMiddleware
         if(ex is NotFoundException)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            error.Message = "Entity not found";
+            error.Message =  ((NotFoundException) ex).NotFoundMessage ?? "Entity not found";
         }
 
         if(ex is BusinessLogicException)

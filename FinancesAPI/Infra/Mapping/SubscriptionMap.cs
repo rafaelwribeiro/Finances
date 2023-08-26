@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinancesAPI.Infra.Mapping;
 
-public class CategoryMap : IEntityTypeConfiguration<Category>
+public class SubscriptionMap : IEntityTypeConfiguration<Subscription>
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
+    public void Configure(EntityTypeBuilder<Subscription> builder)
     {
-        builder.ToTable("Categories");
+        builder.ToTable("Subscriptions");
 
         // Primary Key
         builder.HasKey(x => x.Id);
@@ -19,12 +19,7 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
             .UseIdentityColumn(); //PRIMARY KEY IDENTITY(1, 1)
 
         // Properties
-        builder.Property(x => x.Name)
-            .IsRequired() // NOT NULL
-            //.HasColumnName("Name")
-            .HasColumnType("NVARCHAR")
-            .HasMaxLength(80);
-
         builder.HasOne(x => x.Group);
+        builder.HasOne(x => x.User);
     }
 }

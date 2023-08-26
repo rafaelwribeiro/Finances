@@ -10,10 +10,12 @@ namespace FinancesAPI.Application.Commands.AddUser;
 public class AddUserCommandHandler : IRequestHandler<AddUserCommand, AddUserCommandResult>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IGroupRepository _groupRepository;
 
-    public AddUserCommandHandler(IUserRepository userRepository)
+    public AddUserCommandHandler(IUserRepository userRepository, IGroupRepository groupRepository)
     {
         _userRepository = userRepository;
+        _groupRepository = groupRepository;
     }
 
     public async Task<AddUserCommandResult> Handle(AddUserCommand request, CancellationToken cancellationToken)
@@ -25,8 +27,20 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, AddUserComm
 
         user = await _userRepository.CreateAsync(user);
 
+        await CreateGroup(user);
+
         var result = new AddUserCommandResult();
         result.User = user.Adapt<UserReadContract>();
         return result;
+    }
+
+    private async Task CreateGroup(User user)
+    {
+        var group = new Group();
+        group.Name = $"{user.Login}'s Group";
+        group.Owner = user;
+        group.OwnerId = user.Id;
+        
+        await _groupRepository.CreateAsync(group);
     }
 }
