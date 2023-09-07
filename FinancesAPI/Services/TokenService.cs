@@ -19,6 +19,7 @@ public class TokenService
             {
                 new (ClaimTypes.Name, user.Login), //User.Identity.Name
                 //new (ClaimTypes.Role, user.Role.Name)//User.IsInRole
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             }),
             Expires = DateTime.UtcNow.AddHours(8),
             SigningCredentials = new SigningCredentials(

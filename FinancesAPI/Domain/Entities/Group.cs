@@ -8,6 +8,6 @@ public class Group
     public string Name { get; set; }
     public User Owner { get; set; }
     public int OwnerId { get; set; }
-    public GroupStatus Status { get; set; }
+    public GroupStatus Status { get; set; } = GroupStatus.Active;
     public ICollection<Subscription> Subscriptions { get; set; }
 }

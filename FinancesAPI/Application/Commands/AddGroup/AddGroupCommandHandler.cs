@@ -18,7 +18,7 @@ public class AddGroupCommandHandler : IRequestHandler<AddGroupCommand, AddGroupC
 
     public async Task<AddGroupCommandResult> Handle(AddGroupCommand request, CancellationToken cancellationToken)
     {
-        var group =  request.Adapt<Group>();
+        var group = request.Adapt<Group>();
 
         group = await _groupRepository.CreateAsync(group);
 

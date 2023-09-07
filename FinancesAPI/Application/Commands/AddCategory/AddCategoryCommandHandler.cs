@@ -34,7 +34,7 @@ public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, Add
 
     private async Task VerifyGroupExists(Category entity)
     {
-        var existingGroup = await _groupRepository.GetAsync(entity.Id);
+        var existingGroup = await _groupRepository.GetAsync(entity.GroupId);
         if(existingGroup == null)
             throw new NotFoundException("Group not exists");
     }

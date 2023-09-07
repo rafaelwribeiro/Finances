@@ -27,7 +27,7 @@ public class GroupRepository : IGroupRepository
 
     public async Task<IEnumerable<Group>> GetAllAsync()
     {
-        return await _dbContext.Groups.AsNoTracking().ToListAsync();
+        return await _dbContext.Groups.AsNoTracking().Include(g => g.Owner).ToListAsync();
     }
 
     public async Task<Group?> GetAsync(int id)

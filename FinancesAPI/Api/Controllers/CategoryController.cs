@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FinancesAPI.Application.Commands.AddCategory;
 using FinancesAPI.Application.Commands.DeleteCategory;
 using FinancesAPI.Application.Commands.UpdateCategory;
@@ -12,7 +13,7 @@ namespace FinancesAPI.Api.Controller;
 
 [ApiController]
 [Authorize]
-[Route("[controller]")]
+[Route("groups/{groupId}/[controller]")]
 public class CategoryController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -29,7 +30,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "CategoryDatails")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(int groupId, int id)
     {
         var category = await _mediator.Send(new GetCategoryCommand(id));
         return Ok(category);
@@ -38,9 +39,11 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CategoryCreateContract contract)
     {
-        var result = await _mediator.Send(new AddCategoryCommand(contract));
+        
+        /*var result = await _mediator.Send(new AddCategoryCommand(contract));
         var category = result.Category;
-        return CreatedAtRoute("CategoryDatails", new { Id = category?.Id }, category);
+        return CreatedAtRoute("CategoryDatails", new { Id = category?.Id }, category);*/
+        return Ok();
     }
 
     [HttpDelete("{id}")]
