@@ -4,12 +4,12 @@ using MediatR;
 namespace FinancesAPI.Application.Commands.AddCategory;
 public class AddCategoryCommand : IRequest<AddCategoryCommandResult>
 {
-    public CategoryCreateContract _contract { get; set; }
-    public int OwnerId { get; set; }
+    public CategoryCreateContract Contract { get; set; }
+    public int GroupId { get; set; }
 
-    public AddCategoryCommand(CategoryCreateContract contract, int ownerId )
+    public AddCategoryCommand(CategoryCreateContract contract, int groupId)
     {
-        _contract = contract;
-        OwnerId = ownerId;
+        Contract = contract;
+        GroupId = groupId;
     }
 }

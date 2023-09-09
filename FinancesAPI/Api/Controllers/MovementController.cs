@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinancesAPI.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("groups/{groupId}/[controller]")]
 [Authorize]
 public class MovementController : ControllerBase
 {
@@ -20,36 +20,36 @@ public class MovementController : ControllerBase
     public MovementController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(int groupId)
     {
-        var list = await _mediator.Send(new ListMovementsCommand());
-        return Ok(list);
+        var result = await _mediator.Send(new ListMovementsCommand());
+        return Ok(result.Movements);
     }
 
     [HttpGet("{id}", Name = "MovementDatails")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(int groupId, int id)
     {
         var result = await _mediator.Send(new GetMovementCommand(id));
         return Ok(result.Movement);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] MovementCreateContract contract)
+    public async Task<IActionResult> Create(int groupId, [FromBody] MovementCreateContract contract)
     {
         var result = await _mediator.Send(new AddMovementCommand(User?.Identity?.Name ?? "", contract));
         var movement = result.Movement;
-        return CreatedAtRoute("MovementDatails", new { Id = movement?.Id }, movement);
+        return CreatedAtRoute("MovementDatails", new { id = movement?.Id }, movement);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int groupId, int id)
     {
         var result = await _mediator.Send(new DeleteMovementCommand(id));
         return NoContent();
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(MovementUpdateContract contract)
+    public async Task<IActionResult> Update(int groupId, MovementUpdateContract contract)
     {
         var result = await _mediator.Send(new UpdateMovementCommand(contract.Id, contract));
         return NoContent();

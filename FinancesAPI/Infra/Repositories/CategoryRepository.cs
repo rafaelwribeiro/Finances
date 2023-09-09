@@ -31,6 +31,15 @@ public class CategoryRepository : ICategoryRepository
         return await _dbContext.Categories.AsNoTracking().ToListAsync();
     }
 
+    public async Task<IEnumerable<Category>> GetAllByGroupAsync(int groupId)
+    {
+        return await _dbContext
+                .Categories
+                .AsNoTracking()
+                .Where(c => c.GroupId == groupId)
+                .ToListAsync();
+    }
+
     public async Task<Category?> GetAsync(int id)
     {
         return await _dbContext.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();

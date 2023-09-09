@@ -23,9 +23,9 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(int groupId)
     {
-        var result = await _mediator.Send(new ListCategoriesCommand());
+        var result = await _mediator.Send(new ListCategoriesCommand(groupId));
         return Ok(result.Categories);
     }
 
@@ -37,24 +37,23 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CategoryCreateContract contract)
+    public async Task<IActionResult> Create(int groupId, [FromBody] CategoryCreateContract contract)
     {
         
-        /*var result = await _mediator.Send(new AddCategoryCommand(contract));
+        var result = await _mediator.Send(new AddCategoryCommand(contract, groupId));
         var category = result.Category;
-        return CreatedAtRoute("CategoryDatails", new { Id = category?.Id }, category);*/
-        return Ok();
+        return CreatedAtRoute("CategoryDatails", new {groupId = category?.GroupId,  id = category?.Id }, category);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int groupId, int id)
     {
         await _mediator.Send(new DeleteCategoryCommand(id));
         return NoContent();
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(CategoryUpdateContract contract)
+    public async Task<IActionResult> Update(int groupId, CategoryUpdateContract contract)
     {
         await _mediator.Send(new UpdateCategoryCommand(contract.Id, contract));
         return NoContent();

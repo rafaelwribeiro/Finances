@@ -20,9 +20,10 @@ public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, Add
 
     public async Task<AddCategoryCommandResult> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
     {
-        var entity =  request._contract.Adapt<Category>();
+        var entity =  request.Contract.Adapt<Category>();
+        entity.GroupId = request.GroupId;
 
-        await VerifyGroupExists(entity);
+        await VerifyGroupExists(request.GroupId);
 
         entity = await _categoryRepository.CreateAsync(entity);
 
@@ -32,9 +33,9 @@ public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, Add
         return result;
     }
 
-    private async Task VerifyGroupExists(Category entity)
+    private async Task VerifyGroupExists(int groupId)
     {
-        var existingGroup = await _groupRepository.GetAsync(entity.GroupId);
+        var existingGroup = await _groupRepository.GetAsync(groupId);
         if(existingGroup == null)
             throw new NotFoundException("Group not exists");
     }
