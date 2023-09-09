@@ -32,7 +32,7 @@ public class GroupRepository : IGroupRepository
 
     public async Task<Group?> GetAsync(int id)
     {
-        return await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == id);
+        return await _dbContext.Groups.Include(g => g.Owner).FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task UpdateAsync(Group entity)

@@ -25,8 +25,8 @@ public class CategoryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var list = await _mediator.Send(new ListCategoriesCommand());
-        return Ok(list);
+        var result = await _mediator.Send(new ListCategoriesCommand());
+        return Ok(result.Categories);
     }
 
     [HttpGet("{id}", Name = "CategoryDatails")]

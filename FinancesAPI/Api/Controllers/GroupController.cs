@@ -1,5 +1,8 @@
 using System.Security.Claims;
 using FinancesAPI.Application.Commands.AddGroup;
+using FinancesAPI.Application.Commands.DeleteGroup;
+using FinancesAPI.Application.Commands.UpdateGroup;
+using FinancesAPI.Application.Queries.GetGroup;
 using FinancesAPI.Application.Queries.ListGroups;
 using FinancesAPI.Domain.Contracts;
 using Mapster;
@@ -24,15 +27,14 @@ public class GroupController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var list = await _mediator.Send(new ListGroupsCommand());
-        return Ok(list);
+        return Ok(list.Groups);
     }
 
     [HttpGet("{id}", Name = "GroupDatails")]
     public async Task<IActionResult> Get(int id)
     {
-        //var category = await _mediator.Send(new GetGroupCommand(id));
-        //return Ok(category);
-        return Ok();
+        var result = await _mediator.Send(new GetGroupCommand(id));
+        return Ok(result.Group);
     }
 
     [HttpPost]
@@ -51,15 +53,15 @@ public class GroupController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        //await _mediator.Send(new DeleteGroupCommand(id));
+        await _mediator.Send(new DeleteGroupCommand(id));
         return NoContent();
     }
 
-    /*[HttpPut]
-    public async Task<IActionResult> Update(CategoryUpdateContract contract)
+    [HttpPut]
+    public async Task<IActionResult> Update(GroupUpdateContract contract)
     {
-        await _mediator.Send(new UpdateCategoryCommand(contract.Id, contract));
+        await _mediator.Send(new UpdateGroupCommand(contract.Id, contract));
         return NoContent();
-    }*/
+    }
 
 }
