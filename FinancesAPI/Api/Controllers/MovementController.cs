@@ -22,7 +22,7 @@ public class MovementController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll(int groupId)
     {
-        var result = await _mediator.Send(new ListMovementsCommand());
+        var result = await _mediator.Send(new ListMovementsCommand(groupId));
         return Ok(result.Movements);
     }
 
@@ -36,9 +36,9 @@ public class MovementController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(int groupId, [FromBody] MovementCreateContract contract)
     {
-        var result = await _mediator.Send(new AddMovementCommand(User?.Identity?.Name ?? "", contract));
+        var result = await _mediator.Send(new AddMovementCommand(User?.Identity?.Name ?? "", groupId, contract));
         var movement = result.Movement;
-        return CreatedAtRoute("MovementDatails", new { id = movement?.Id }, movement);
+        return CreatedAtRoute("MovementDatails", new { groupId, id = movement?.Id }, movement);
     }
 
     [HttpDelete("{id}")]

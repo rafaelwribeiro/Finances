@@ -34,6 +34,14 @@ public class MovementRepository : IMovementRepository
             .AsNoTracking()
             .ToListAsync();
 
+    public async Task<IEnumerable<Movement>> GetAllByGroupAsync(int groupId)
+    => await _dbContext
+            .Movements
+            .Where(m => m.GroupId == groupId)
+            .Include(x => x.Category)
+            .Include(x => x.User)
+            .AsNoTracking()
+            .ToListAsync();
 
     public async Task<Movement?> GetAsync(int id)
         => await _dbContext

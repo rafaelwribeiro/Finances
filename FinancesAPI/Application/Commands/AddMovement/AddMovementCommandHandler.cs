@@ -21,6 +21,7 @@ public class AddMovementCommandHandler : IRequestHandler<AddMovementCommand, Add
     public async Task<AddMovementCommandResult> Handle(AddMovementCommand request, CancellationToken cancellationToken)
     {
         var entity =  request.Contract.Adapt<Movement>();
+        entity.GroupId = request.GroupId;
 
         entity.User = await SolveUser(request.Login);
 

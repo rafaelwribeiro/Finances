@@ -16,7 +16,7 @@ public class ListMovementsCommandHandler : IRequestHandler<ListMovementsCommand,
 
     public async Task<ListMovementsCommandResult> Handle(ListMovementsCommand request, CancellationToken cancellationToken)
     {
-        var entities = await _movementRepository.GetAllAsync();
+        var entities = await _movementRepository.GetAllByGroupAsync(request.GroupId);
 
         var result = new ListMovementsCommandResult();
         result.Movements = entities.Adapt<IList<MovementReadContract>>();

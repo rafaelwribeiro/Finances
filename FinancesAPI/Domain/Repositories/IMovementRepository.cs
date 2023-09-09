@@ -5,6 +5,7 @@ public interface IMovementRepository
 {
     public Task<Movement> CreateAsync(Movement entity);
     public Task<IEnumerable<Movement>> GetAllAsync();
+    public Task<IEnumerable<Movement>> GetAllByGroupAsync(int groupId);
     public Task<Movement?> GetAsync(int id);
     public Task<bool> IsThereWithCategoryAsync(int categoryId);
     public Task UpdateAsync(Movement entity);
