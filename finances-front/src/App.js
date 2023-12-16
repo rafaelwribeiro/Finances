@@ -1,23 +1,26 @@
 import { Routes, Route } from 'react-router-dom';
+import Container from './pages/Container/Container';
+import useAuth from "./hooks/useAuth";
 import Home from './pages/Home';
-import Signein from './pages/Signein';
-import GlobalStyle from './styles/global';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import { AuthProvider } from './contexts/auth';
 
 const Private = ({Item}) => {
-  const signed = false;
-  return signed ? <Item /> : <Signein />;
+  const { signed } = useAuth();
+  return signed ? <Container Item={Item} /> : <Signin />;
 };
 
 function App() {
   return (
-    <>
-      <h1>Teste</h1>
+    <AuthProvider>
       <Routes>
         <Route path="/home" element={<Private Item={Home} />} />
-        <Route path="*" element={<Signein />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Signin />} />
+        <Route path="*" element={<Signin />} />
       </Routes>
-      <GlobalStyle />
-    </>
+    </AuthProvider>
   );
 }
 
