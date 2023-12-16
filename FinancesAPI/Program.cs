@@ -15,7 +15,18 @@ public class Program
 {
     private static void Main(string[] args)
     {
+        var MyAllowSpecificOrigins = "strict-origin-when-cross-origin";
         var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                            policy =>
+                            {
+                                policy.WithOrigins("*")
+                                                        .AllowAnyHeader()
+                                                        .AllowAnyMethod();
+                            });
+        });
 
         var key = Encoding.ASCII.GetBytes(Configuration.JwtKey);
         builder.Services.AddAuthentication(x =>
@@ -91,10 +102,10 @@ public class Program
         var app = builder.Build();
 
         using(var scope = app.Services.CreateScope())
-{
-        var services = scope.ServiceProvider;
-        InitialLoad.Load(services);
-}
+        {
+            var services = scope.ServiceProvider;
+            InitialLoad.Load(services);
+        }
 
         // Configure the HTTP request pipeline.
         //if (app.Environment.IsDevelopment())
@@ -111,6 +122,8 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.UseCors(MyAllowSpecificOrigins);
 
         app.Run();
     }
